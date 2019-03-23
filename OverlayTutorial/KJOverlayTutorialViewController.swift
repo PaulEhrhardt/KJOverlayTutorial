@@ -50,17 +50,17 @@ class KJOverlayTutorialViewController: UIViewController {
     self.view.frame = window.bounds
     window.addSubview(self.view)
     
-    viewController.addChildViewController(self)
-    self.didMove(toParentViewController: viewController)
+    viewController.addChild(self)
+    self.didMove(toParent: viewController)
     
     self.currentTutorialIndex = -1
     self.showNextTutorial()
   }
   
   func close() {
-    self.willMove(toParentViewController: nil)
+    self.willMove(toParent: nil)
     self.view.removeFromSuperview()
-    self.removeFromParentViewController()
+    self.removeFromParent()
   }
   
   @objc func handleTapGesture(gesture: UITapGestureRecognizer) {
@@ -102,7 +102,7 @@ class KJOverlayTutorialViewController: UIViewController {
                         cornerHeight: tutorial.focusRectangleCornerRadius)
     let maskLayer = CAShapeLayer()
     maskLayer.path = path
-    maskLayer.fillRule = kCAFillRuleEvenOdd
+    maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
     bgView.clipsToBounds = true
     bgView.layer.mask = maskLayer
     
@@ -191,7 +191,7 @@ extension KJOverlayTutorialViewController {
     
     let vector = CGPoint.createVector(from: from, to: to, isUnit: true)
     let perpendVector = CGPoint.createPerpendicularVectorWith(vector: vector)
-    let distance = CGFloat(CGPoint.distanceOf(p1: from, p2: to) * 0.085)
+    let distance = CGFloat(CGPoint.distanceOf(pt1: from, pt2: to) * 0.085)
     
     let centerPoint = CGPoint(x: (from.x + to.x)/2.0, y: (from.y + to.y)/2.0)
     let controlDirection: CGFloat = from.x <= to.x ? -1 : 1
@@ -210,7 +210,7 @@ extension KJOverlayTutorialViewController {
     let vector = CGPoint.createVector(from: from, to: to, isUnit: true)
     
     let controlDirection: CGFloat = from.x <= to.x ? -1 : 1
-    let distance = CGFloat(CGPoint.distanceOf(p1: from, p2: to) * 0.00085) * controlDirection
+    let distance = CGFloat(CGPoint.distanceOf(pt1: from, pt2: to) * 0.00085) * controlDirection
     var fromCurve = CGPoint(x: to.x - vector.x, y: to.y - vector.y)
     fromCurve = CGPoint(x: fromCurve.x + (-vector.y) * distance, y: fromCurve.y + vector.x * distance)
     
