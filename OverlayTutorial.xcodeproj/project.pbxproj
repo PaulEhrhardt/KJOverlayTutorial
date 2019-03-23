@@ -87,6 +87,7 @@
 				BAF376051EC5C7CF0038104C /* KJOverlayTutorialViewController.swift */,
 			);
 			name = "0-Class";
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		BA9AC9561EE652DC005541FB /* Resources */ = {
